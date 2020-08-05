@@ -1,0 +1,31 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int numCoins, amount;
+    cin>>numCoins>>amount;
+    int coins[numCoins+1];
+    for(int i=0; i<numCoins; i++)
+    {
+        cin>>coins[i];
+    }
+    vector<int> dp(amount+1, amount+4);    //because it will iterate from 1 to amount
+    dp[0]=0; 
+    for(int i =0; i<=amount; i++)
+    {
+        for(int j=0; j<numCoins; j++)
+        {
+            //make sure that the coin value is less or equal to the current amount
+            if(coins[j]<=i)
+            {
+                dp[i] = min(dp[i] , 1 + dp[i-coins[j]]);
+            }
+        }
+    }
+    if(dp[amount] == amount+4)
+    {
+        dp[amount] = -1;
+    }
+    cout<<dp[amount];
+}

@@ -21,3 +21,20 @@ int main()
 	}
 	cout<<dp[n];
 }
+
+**************************************************************************************************************************************
+*********************************SIMRAN'S BLOG ON DP**********************************************************************************
+Q. from CSES. Dice Combinations
+This is a typical DP problem. Defining the state of a DP problem, in a clear and unambiguous manner, is half the battle fought. What remains is the implementation.
+In this problem the state is as follows:
+dp[i] = number of ways to get sum i using numbers 1 to 6.
+Now think about the sum given to you in the question, say "x". There are so many dice throws in which you can get to the sum "x". This is where a systematic thought 
+process helps you.
+Imagine you are just one dice roll away from reaching your target "x". Where could possibly be standing?
+Either at (x-1) or (x-2) or (x-3) or (x-4) or (x-5) or (x-6).
+Hence, we need to sum over all these poosibilities.
+So in other words: 
+number of ways to get [x] = number of ways to get [x-1] + number of ways to get [x-2] + number of ways to get [x-3] + number of ways to get [x-4] +number of ways to get [x-5] + number of ways to get [x-6]
+That is:
+dp[x] = dp[x-1] + dp[x-2] + dp[x-3] + dp[x-4] + dp[x-5] + dp[x-6]
+

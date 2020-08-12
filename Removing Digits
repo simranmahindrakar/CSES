@@ -1,0 +1,25 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int n;
+	cin>>n;
+	int dp [n+1];
+	dp[0] = 0; //base case
+	
+	for(int i =1; i<=n; i++) //loop to populate dp
+	{
+		dp[i] = 1e6 + 3;
+		int temp = i;
+		while(temp != 0)
+		{
+			int digit = temp % 10;
+			temp /= 10;
+			dp[i] = min(dp[i] , 1 + dp[i - digit]);
+		}
+   }
+	cout<<dp[n];
+}
+State of the dp:
+dp[x] = minimum number of steps to go from x to 0

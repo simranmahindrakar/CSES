@@ -25,3 +25,14 @@ int main()
     }
     cout<<dp[amount]<<endl;
 }
+
+State of dp is:
+dp[i] = no. of distinct ways you can get sum i using the given coins
+Smaple input. Target = "sum" Coin denominations: c1, c2, c3.
+Imagine you are just one more coin away from reaching your target. That means adding the value of any one of the given coins c1, c2, c3 will give you the required sum.
+Where could you be possible standing?
+either at (sum-c1), (sum-c2) or (sum-c3)
+In other words - 
+no. of ways to get "sum" = no. of ways to get (sum-c1) + no. of ways to get (sum-c2) + no. of ways to get (sum-c3).
+dp[i] = dp[i-c1] + dp[i-c2] + dp[i-c3]  
+Here the base case is dp[0] = 0

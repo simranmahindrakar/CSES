@@ -1,0 +1,61 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+int main ()
+{
+	int mod = 1e9 +7;
+	int n; //size of nxn matrice.
+	cin>>n;
+	vector<vector<int> > dp (n+1, vector<int> (n+1,0)); //declare a vector of vectors of size n+1 and initialise it to 0
+	//base case
+	dp[0][0] = 1; //only one way to reach cell (0,0)
+
+
+
+	for(int i=0; i<n; i++)
+	{
+		string row;
+		cin>>row; //take the input one row at a time
+		
+		for(int j=0; j<n; j++)
+		{
+	         if(row[j] == '.')
+			{
+				if(i>0)
+				{
+					(dp[i][j] += dp[i-1][j]) %= mod;
+				}
+				if(j>0)
+				{
+					(dp[i][j] += dp[i][j-1]) %= mod;
+				}
+				
+			}
+			if(row[j] == '*')   //if trap then no. of ways to get to this cell = 0
+			{
+				dp[i][j] = 0;
+			}
+		}
+		}
+		cout<<dp[n-1][n-1];	
+	}
+  
+  This is a classic DP problem : to find the number of ways to do something
+  state of dp:
+  dp[i][j] =  number of ways to reach row i column j from (0,0)
+  But if the cell is a trap dp[i][j] = 0. We say 0 ways because no path passing through that cell is a valid one and so our final answer will automatically not include
+  any of the invalid paths.
+  Here the base case is dp[0][0] = 1 because there is only one way to reach cell (0,0)
+  
+  Input is a nxn matrix of characters / n rows of strings each of length n
+  Run a loop through the rows. Take in the input as a string of length n
+  now if the charcter at the string index in question is a '.' we calculate the ways to reach that cell. We can reach there either coming from its left or coming from above
+  it.
+  if(i>0) we can only come from above
+  if(j>0) we can only come from the left
+  and if (j>0 && i>0) both the if statements will be true and the dp will be calculated accordingly.
+  
+  
+ 
+  
+  

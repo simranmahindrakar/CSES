@@ -10,16 +10,27 @@ int main()
 	
 	for(int i =1; i<=n; i++) //loop to populate dp
 	{
-		dp[i] = 1e6 + 3;
-		int temp = i;
+		dp[i] = 1e6 + 3;   //initialise the dp with a very large number
+		int temp = i;      //store the current number in  temp
 		while(temp != 0)
 		{
-			int digit = temp % 10;
-			temp /= 10;
-			dp[i] = min(dp[i] , 1 + dp[i - digit]);
+			int digit = temp % 10;  //break temp into digits
+			temp /= 10;             //truncate the units digit
+			dp[i] = min(dp[i] , 1 + dp[i - digit]); //fill dp[i] with minimum value
 		}
    }
 	cout<<dp[n];
 }
+
+****************************************************************************************************************************************************************
 State of the dp:
 dp[x] = minimum number of steps to go from x to 0
+We have to find dp[n]
+Base case is dp[0] = 0
+Sample input n = d1d2d3 where d1,d2,d3 are the digits that make up n
+In step 1 we can subtract any one of the three digits from n. So lets do this systematically
+Say, if we subtract digit d1 from n, we get a number x1. Similarly, if we subtract digit d2 from n, we get a number x2 and number x3 if we subtract digit d3 from n.
+Now to get from x1 to 0 it takes s1 steps
+s2 steps to go from x2 to 0 and s3 steps to go from x3 to 0.
+The required ans is 1+min(s1,s2,s3)
+
